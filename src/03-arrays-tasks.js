@@ -285,9 +285,9 @@ function getSecondItems(/* arr */) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-  // return arr.map((item, index) => Array(index + 1).join(item)).join('');
+function propagateItemsByPositionIndex(arr) {
+  // throw new Error('Not implemented');
+  return arr.reduce((acc, curr, index) => [...acc, ...Array(index + 1).fill(curr)], []);
 }
 
 
@@ -562,8 +562,9 @@ function group(array, keySelector, valueSelector) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  // throw new Error('Not implemented');
+  return arr.reduce((acc, item) => [...acc, ...childrenSelector(item)], []);
 }
 
 
@@ -579,8 +580,9 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  // throw new Error('Not implemented');
+  return indexes.reduce((acc, index) => acc[index], arr);
 }
 
 

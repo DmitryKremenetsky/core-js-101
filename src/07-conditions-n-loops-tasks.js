@@ -254,8 +254,15 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  // throw new Error('Not implemented');
+  const chars = str.split('');
+  const reversedChars = [];
+  for (let i = 0; i < chars.length; i += 1) {
+    reversedChars.unshift(chars[i]);
+  }
+
+  return reversedChars.join('');
 }
 
 
@@ -271,8 +278,11 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  // throw new Error('Not implemented');
+  const numString = num.toString();
+  const reversedNumString = reverseString(numString);
+  return parseInt(reversedNumString, 10);
 }
 
 
@@ -314,8 +324,17 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  // throw new Error('Not implemented');
+  let sum = 0;
+  const numString = num.toString();
+  for (let i = 0; i < numString.length; i += 1) {
+    sum += parseInt(numString[i], 10);
+  } if (sum > 9) {
+    return getDigitalRoot(sum);
+  }
+
+  return sum;
 }
 
 
@@ -340,8 +359,27 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  // throw new Error('Not implemented');
+  const brackets = {
+    '{': '}',
+    '[': ']',
+    '(': ')',
+    '<': '>',
+  };
+  const stack = [];
+  const chars = str.split('');
+  for (let i = 0; i < chars.length; i += 1) {
+    if (brackets[chars[i]]) {
+      stack.push(chars[i]);
+    } else if (brackets[stack[stack.length - 1]] === chars[i]) {
+      stack.pop();
+    } else {
+      return false;
+    }
+  }
+
+  return stack.length === 0;
 }
 
 
